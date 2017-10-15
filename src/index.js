@@ -1,5 +1,13 @@
-module.exports = function nuxtSassResourcesLoader (options) {
-  if (typeof options === 'string' || Array.isArray(options)) {
+const extname = require('path').extname
+
+module.exports = function nuxtSassResourcesLoader (options, extensions) {
+  if (typeof options === 'string') {
+    options = {
+      resources: [options]
+    }
+  }
+
+  if (Array.isArray(options)) {
     options = {
       resources: options
     }
@@ -11,23 +19,27 @@ module.exports = function nuxtSassResourcesLoader (options) {
   }
 
   this.extendBuild((config, { isClient, isServer }) => {
-    const sassLoader = config.module.rules.filter(({test}) => {
-      return ['/\\.sass$/', '/\\.scss$/'].indexOf(test.toString()) !== -1
-    })
-    const vueLoader = config.module.rules.find(({test}) => {
-      return test.toString() === '/\\.vue$/'
-    })
+    options.resources.forEach((resource) => {
+      const ext = extensions || extname(resource)
+      const styleLoaders = config.module.rules.filter(({test}) => {
+        return test.exec(ext)
+      })
 
-    const loaders = vueLoader.options.loaders
+      Object.keys(styleLoaders).forEach(loader => {
+        styleLoaders[loader].use.push(sassResourcesLoader)
+      })
 
-    Object.keys(loaders).forEach(loader => {
-      if (['sass', 'css'].indexOf(loader) !== -1) {
-        loaders[loader].push(sassResourcesLoader)
-      }
-    })
+      const vueConfig = config.module.rules.find(({test}) => {
+        return test.toString() === '/\\.vue$/'
+      })
 
-    Object.keys(sassLoader).forEach(loader => {
-      sassLoader[loader].use.push(sassResourcesLoader)
+      const vueLoaders = vueConfig.options.loaders
+
+      Object.keys(vueLoaders).forEach(loader => {
+        if (ext.indexOf(loader) !== -1) {
+          vueLoaders[loader].push(sassResourcesLoader)
+        }
+      })
     })
   })
 }

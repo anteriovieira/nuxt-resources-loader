@@ -2,8 +2,6 @@
 
 [![npm](https://img.shields.io/npm/v/nuxt-resources-loader.svg)](https://www.npmjs.com/package/nuxt-resources-loader)
 
-> [sass-resources-loader](https://github.com/shakacode/sass-resources-loader)
-
 ## Install
 
 ```sh
@@ -26,12 +24,12 @@ module.exports = {
     // or array of paths
     ['nuxt-resources-loader', [
         resolve(__.dirname, 'path/to/first-resources.sass'),
-        resolve(__.dirname, 'path/to/second-resources.scss'),
+        resolve(__.dirname, 'path/to/second-resources.styl', ['stylus', 'styl']),
     ]],
 
     // or the native options
     ['nuxt-resources-loader', {
-        resources: resolve(__.dirname, 'path/to/resources.sass')
+        resources: resolve(__.dirname, 'path/to/resources.stylus')
     }],
   ]
 }
