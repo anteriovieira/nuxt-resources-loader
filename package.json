@@ -1,11 +1,11 @@
 {
     "name": "nuxt-resources-loader",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Nuxt module",
     "license": "MIT",
     "contributors": [
         {
-        "name": "Antério vieira <anteriovieira@gmail.com>"
+            "name": "Antério vieira <anteriovieira@gmail.com>"
         }
     ],
     "main": "dist/index.js",
@@ -36,8 +36,8 @@
         "coverageDirectory": "./coverage/",
         "collectCoverage": true,
         "collectCoverageFrom": [
-        "lib",
-        "src"
+            "lib",
+            "src"
         ]
     },
     "dependencies": {
@@ -47,4 +47,3 @@
         "nuxt-module-builder": "latest"
     }
 }
-  
