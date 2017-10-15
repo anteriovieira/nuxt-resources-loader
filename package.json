@@ -1,0 +1,49 @@
+{
+  "name": "nuxt-resources-loader",
+  "version": "0.0.1",
+  "description": "Nuxt module",
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Antério vieira <anteriovieira@gmail.com>"
+    }
+  ],
+  "main": "dist/index.js",
+  "repository": "https://github.com/anteriovieira/nuxt-resources-loader",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "nuxt-module",
+    "watch": "nuxt-module --watch",
+    "lint": "eslint lib src test",
+    "lint-fix": "eslint --fix lib src test",
+    "test": "NODE_ENV=test npm run build && npm run lint && jest",
+    "release": "standard-version && git push --follow-tags && npm publish",
+    "prepare": "npm run build"
+  },
+  "eslintIgnore": [
+    "*.template.*"
+  ],
+  "files": [
+    "lib",
+    "src",
+    "dist",
+    "templates"
+  ],
+  "jest": {
+    "testEnvironment": "node",
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "lib",
+      "src"
+    ]
+  },
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "nuxt-module-builder": "latest"
+  }
+}
