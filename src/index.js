@@ -18,7 +18,7 @@ module.exports = function nuxtSassResourcesLoader (options) {
       return test.toString() === '/\\.vue$/'
     })
 
-    const loaders = vueLoader.options.loaders;
+    const loaders = vueLoader.options.loaders
 
     Object.keys(loaders).forEach(loader => {
       if (['sass', 'css'].indexOf(loader) !== -1) {
