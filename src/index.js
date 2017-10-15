@@ -31,5 +31,3 @@ module.exports = function nuxtSassResourcesLoader (options) {
     })
   })
 }
-
-module.exports.meta = require('../package.json')
